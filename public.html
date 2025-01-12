@@ -5,105 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sipariş Sayfası - Okul</title>
     <style>
-        /* Body background with single image */
         body {
-            background-color: #ff5722;
             font-family: "Comic Sans MS", cursive, sans-serif;
             text-align: center;
-            padding: 0;
             margin: 0;
-            height: 100vh;
-            overflow-x: hidden;
-
-            /* Add your background image */
-            background-image: url('download.jpeg'); /* Path to your background image */
-            background-size: cover;  /* Makes the image cover the entire page */
-            background-position: center;  /* Centers the image */
-            background-repeat: no-repeat; /* Prevents the image from repeating */
-            background-attachment: fixed; /* Keeps the image fixed while scrolling */
+            padding: 0;
+            background-image: url('background-image.jpg');  /* Background Image */
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            color: white;
         }
 
         h1 {
-            margin-bottom: 50px;
+            margin-top: 50px;
             font-size: 40px;
-            padding-top: 50px;
-            color: white;  /* White color for text to stand out */
         }
 
+        /* Name input box */
+        .name-input-container {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        .name-input-container input {
+            padding: 10px;
+            font-size: 20px;
+            width: 250px;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+            margin-top: 10px;
+        }
+
+        /* Button Container for large image buttons */
         .button-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 40px;
-            padding: 20px;
+            margin-top: 40px;
         }
 
+        /* Style for individual buttons */
         .button-container button {
-            width: 400px;
-            height: 400px;
-            font-size: 30px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
             position: relative;
-            padding: 0;
-            transition: all 0.3s ease;
+            width: 300px;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;  /* Ensures image fits correctly within the button */
+            cursor: pointer;
+            border: none;
         }
 
         .button-container button img {
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 15px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;  /* Makes sure the image fills the button */
         }
 
-        .button-container button span {
+        /* Black Overlay with item name */
+        .button-container button .overlay {
             position: absolute;
-            bottom: 10px;
-            left: 0;
-            right: 0;
-            font-size: 30px;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Black with some transparency */
+            color: white;
+            padding: 10px;
             text-align: center;
-            color: white;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-            padding: 10px 0;
+            font-size: 18px;
+            border-top: 2px solid #fff;
         }
 
-        .button-container button:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
+        /* Hover effect */
+        .button-container button:hover .overlay {
+            background-color: rgba(0, 0, 0, 0.9); /* Darker on hover */
         }
 
-        .form-container {
-            margin-top: 30px;
-        }
-
-        .form-container input {
-            padding: 15px;
-            margin: 10px;
-            font-size: 20px;
-            border-radius: 10px;
-            width: 350px;
-        }
-
-        .form-container button {
-            padding: 15px 30px;
-            font-size: 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .form-container button:hover {
-            background-color: #45a049;
-        }
-
+        /* Developer Button */
         .dev-button {
             background-color: #ff5722;
             margin-top: 40px;
@@ -120,40 +98,65 @@
 <body>
     <h1>Ürünlerinizi Sipariş Edin</h1>
 
-    <div class="form-container">
-        <input type="text" id="studentName" placeholder="Adınız" required>
+    <!-- Name input box -->
+    <div class="name-input-container">
+        <label for="studentName">Adınızı girin:</label>
+        <input type="text" id="studentName" placeholder="Adınızı buraya yazın..." required>
     </div>
 
+    <!-- Large image buttons with names -->
     <div class="button-container">
         <button onclick="placeOrder('Limonata')">
             <img src="limonata-image.jpg" alt="Limonata">
-            <span>Limonata</span>
+            <div class="overlay">Limonata</div>
         </button>
         <button onclick="placeOrder('Gofret')">
             <img src="gofret-image.jpg" alt="Gofret">
-            <span>Gofret</span>
+            <div class="overlay">Gofret</div>
         </button>
         <button onclick="placeOrder('Su')">
             <img src="su-image.jpg" alt="Su">
-            <span>Su</span>
+            <div class="overlay">Su</div>
         </button>
         <button onclick="placeOrder('Şeker')">
             <img src="seker-image.jpg" alt="Şeker">
-            <span>Şeker</span>
+            <div class="overlay">Şeker</div>
         </button>
         <button onclick="placeOrder('Gizli Menü')">
             <img src="gizli-menu-image.jpg" alt="Gizli Menü">
-            <span>Gizli Menü</span>
+            <div class="overlay">Gizli Menü</div>
         </button>
     </div>
 
+    <!-- Developer Button -->
     <div>
         <button class="dev-button" onclick="goToDevPage()">Sadece Geliştiriciler</button>
     </div>
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+
     <script>
+        // Your Firebase Config object
+        const firebaseConfig = {
+            apiKey: "AIzaSyAw6F9QaQf_Dn4AF0usjbUj_3FSwUj6m_c",
+            authDomain: "kankatakas-fb49f.firebaseapp.com",
+            databaseURL: "https://kankatakas-fb49f-default-rtdb.firebaseio.com",
+            projectId: "kankatakas-fb49f",
+            storageBucket: "kankatakas-fb49f.firebasestorage.app",
+            messagingSenderId: "1054725218223",
+            appId: "1:1054725218223:web:9436fcf32347c77f4a595a",
+            measurementId: "G-NHGGEZ1TNL"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // Function to place an order
         function placeOrder(item) {
-            var studentName = document.getElementById('studentName').value;
+            const studentName = document.getElementById("studentName").value; // Get name from input box
 
             if (!studentName) {
                 alert('Sipariş vermeden önce adınızı girin!');
@@ -161,24 +164,38 @@
             }
 
             // Create the order object
-            var orderDetails = {
+            const orderDetails = {
                 student: studentName,
                 item: item,
                 time: new Date().toLocaleString()
             };
 
-            // Retrieve the orders from localStorage (ensure it's an array)
-            var orders = JSON.parse(localStorage.getItem('orders')) || [];
-
-            // Add the new order to the orders array
-            orders.push(orderDetails);
-
-            // Save the updated orders array back to localStorage
-            localStorage.setItem('orders', JSON.stringify(orders));
-
-            // Redirect to the confirmation page (rew.html)
-            window.location.href = 'rew.html';
+            // Push the order to Firebase Realtime Database
+            db.ref('orders').push(orderDetails).then(() => {
+                alert(`${studentName} siparişiniz başarıyla alındı!`);
+            });
         }
+
+        // Real-time listener for orders
+        db.ref('orders').on('value', function(snapshot) {
+            const orders = snapshot.val();
+            const orderContainer = document.getElementById('orderContainer');
+            orderContainer.innerHTML = ''; // Clear previous orders
+
+            if (orders) {
+                for (const key in orders) {
+                    if (orders.hasOwnProperty(key)) {
+                        const order = orders[key];
+                        const orderElement = document.createElement('div');
+                        orderElement.classList.add('order-item');
+                        orderElement.innerHTML = `<strong>${order.student}</strong> - ${order.item} (Zaman: ${order.time})`;
+                        orderContainer.appendChild(orderElement);
+                    }
+                }
+            } else {
+                orderContainer.innerHTML = '<p>Henüz sipariş yok.</p>';
+            }
+        });
 
         // Redirect to DEV page for developer orders overview
         function goToDevPage() {
@@ -187,3 +204,4 @@
     </script>
 </body>
 </html>
+
