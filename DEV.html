@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geliştirici - Tüm Siparişler</title>
+    <style>
+        body {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 14px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tüm Siparişler</h1>
+
+    <table id="orders-table">
+        <thead>
+            <tr>
+                <th>Öğrenci Adı</th>
+                <th>Sipariş Edilen Ürün</th>
+                <th>Sipariş Zamanı</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Orders will be displayed here -->
+        </tbody>
+    </table>
+
+    <button onclick="goBack()">Sipariş Sayfasına Geri Dön</button>
+
+    <script>
+        window.onload = function() {
+            // Retrieve all orders from localStorage
+            var orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+            var tableBody = document.getElementById('orders-table').getElementsByTagName('tbody')[0];
+
+            if (orders.length === 0) {
+                tableBody.innerHTML = "<tr><td colspan='3'>Henüz sipariş verilmedi.</td></tr>";
+            } else {
+                // Display all orders in the table
+                orders.forEach(order => {
+                    var row = tableBody.insertRow();
+                    row.innerHTML = `
+                        <td>${order.student}</td>
+                        <td>${order.item}</td>
+                        <td>${order.time}</td>
+                    `;
+                });
+            }
+        };
+
+        // Function to go back to the order page
+        function goBack() {
+            window.location.href = 'public.html';
+        }
+    </script>
+</body>
+</html>

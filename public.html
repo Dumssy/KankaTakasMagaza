@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sipariş Sayfası - Okul</title>
+    <style>
+        /* Body background with single image */
+        body {
+            background-color: #ff5722;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            overflow-x: hidden;
+
+            /* Add your background image */
+            background-image: url('download.jpeg'); /* Path to your background image */
+            background-size: cover;  /* Makes the image cover the entire page */
+            background-position: center;  /* Centers the image */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            background-attachment: fixed; /* Keeps the image fixed while scrolling */
+        }
+
+        h1 {
+            margin-bottom: 50px;
+            font-size: 40px;
+            padding-top: 50px;
+            color: white;  /* White color for text to stand out */
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .button-container button {
+            width: 400px;
+            height: 400px;
+            font-size: 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            position: relative;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        .button-container button img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .button-container button span {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            font-size: 30px;
+            text-align: center;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 10px 0;
+        }
+
+        .button-container button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .form-container {
+            margin-top: 30px;
+        }
+
+        .form-container input {
+            padding: 15px;
+            margin: 10px;
+            font-size: 20px;
+            border-radius: 10px;
+            width: 350px;
+        }
+
+        .form-container button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        .dev-button {
+            background-color: #ff5722;
+            margin-top: 40px;
+            padding: 15px 40px;
+            font-size: 20px;
+            border-radius: 10px;
+        }
+
+        .dev-button:hover {
+            background-color: #e64a19;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ürünlerinizi Sipariş Edin</h1>
+
+    <div class="form-container">
+        <input type="text" id="studentName" placeholder="Adınız" required>
+    </div>
+
+    <div class="button-container">
+        <button onclick="placeOrder('Limonata')">
+            <img src="limonata-image.jpg" alt="Limonata">
+            <span>Limonata</span>
+        </button>
+        <button onclick="placeOrder('Gofret')">
+            <img src="gofret-image.jpg" alt="Gofret">
+            <span>Gofret</span>
+        </button>
+        <button onclick="placeOrder('Su')">
+            <img src="su-image.jpg" alt="Su">
+            <span>Su</span>
+        </button>
+        <button onclick="placeOrder('Şeker')">
+            <img src="seker-image.jpg" alt="Şeker">
+            <span>Şeker</span>
+        </button>
+        <button onclick="placeOrder('Gizli Menü')">
+            <img src="gizli-menu-image.jpg" alt="Gizli Menü">
+            <span>Gizli Menü</span>
+        </button>
+    </div>
+
+    <div>
+        <button class="dev-button" onclick="goToDevPage()">Sadece Geliştiriciler</button>
+    </div>
+
+    <script>
+        function placeOrder(item) {
+            var studentName = document.getElementById('studentName').value;
+
+            if (!studentName) {
+                alert('Sipariş vermeden önce adınızı girin!');
+                return;
+            }
+
+            // Create the order object
+            var orderDetails = {
+                student: studentName,
+                item: item,
+                time: new Date().toLocaleString()
+            };
+
+            // Retrieve the orders from localStorage (ensure it's an array)
+            var orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+            // Add the new order to the orders array
+            orders.push(orderDetails);
+
+            // Save the updated orders array back to localStorage
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            // Redirect to the confirmation page (rew.html)
+            window.location.href = 'rew.html';
+        }
+
+        // Redirect to DEV page for developer orders overview
+        function goToDevPage() {
+            window.location.href = 'DEV.html';
+        }
+    </script>
+</body>
+</html>
